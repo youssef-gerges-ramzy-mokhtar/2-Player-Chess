@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.lang.Math.*;
 
 class Tower extends Piece {
 

@@ -7,9 +7,9 @@ class Jumper extends Piece {
 		super(white);
 		
 		if (white == true) {
-			symbol = new ImageIcon(getClass().getResource("Images 1/WJ.gif", "wj"));
+			symbol = new ImageIcon(getClass().getResource("Images 1/WJ.gif"), "wj");
 		} else {
-			symbol = new ImageIcon(getClass().getResource("Images 1/BJ.gif", "bj"));
+			symbol = new ImageIcon(getClass().getResource("Images 1/BJ.gif"), "bj");
 		}
 	}
 
