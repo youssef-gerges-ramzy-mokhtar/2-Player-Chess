@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.lang.Math.*;
 
 class Tower extends Piece {
 
@@ -6,16 +7,12 @@ class Tower extends Piece {
 	public Tower(Boolean white) {
 		super(white);
 
-		if (white == true) {
-			symbol = new ImageIcon("Images 1/WT.gif", "wt");
-		} else {
-			symbol = new ImageIcon("Images 1/BT.gif", "bt");
-		}
+		if (white == true) symbol = new ImageIcon(getClass().getResource("Images 1/WT.gif"), "wt");
+		else symbol = new ImageIcon(getClass().getResource("Images 1/BT.gif"), "bt");
 	}
 
 	// the canMove() method checks if a Piece can move from the currentSpot to the finalSpot
 	public Boolean canMove(Board board, Spot currentSpot, Spot finalSpot) {
-
 		int[] changes = checkMoveValidity(currentSpot, finalSpot);
 		if (changes == null) return false;
 
@@ -36,42 +33,28 @@ class Tower extends Piece {
 		Boolean horizontalMove = (verticalChange == 0);
 
 		if (verticalMove) {
-			// We check if it is moving up or down
-			// If the Final Spot Row is larger than the Current Spot Row then the Tower is moving Up
-			Boolean movingUp = finalSpotRow > currentSpotRow;
+			int currentRowCheck = Math.min(currentSpotRow, finalSpotRow) + 1;
+			int finalRowCheck = Math.max(currentSpotRow, finalSpotRow) - 1;
 
 			// Here if the Tower is moving up or if the tower is moving down we check
 			// all the Spots between the Current Spot and the Final Spot If any of those spots
 			// contain a Chess Piece then the Tower cannot move
-			if (movingUp) {
-				for (int i = currentSpotRow + 1; i < finalSpotRow; i++) {
-					if (board.getSpot(i, currentSpotCol).getPiece() != null) return false;
-				}
-			} else {
-				for (int i = currentSpotRow - 1; i > finalSpotRow; i--) {
-					if (board.getSpot(i, currentSpotCol).getPiece() != null) return false;
-				}
+			for (int i = currentRowCheck; i <= finalRowCheck; i++) {
+				if (board.getSpot(i, currentSpotCol).getPiece() != null) return false;
 			}
 
 			return true;
 		}
 
 		if (horizontalMove) {
-			// We check if it is moving left or right
-			// If the Final Spot Column is larger than the Current Spot Column then the Tower is moving right
-			Boolean movingRight = finalSpotCol > currentSpotCol;
+			int currentColCheck = Math.min(currentSpotCol, finalSpotCol) + 1;
+			int finalColCheck = Math.max(currentSpotCol, finalSpotCol) - 1;
 
-			// Here if the Towere is moving right or if the tower is moving left we check
+			// Here if the Tower is moving right or if the tower is moving left we check
 			// all the Spots between the Current Spot and the Final Spot If any of those spots
 			// contain a Chess Piece then the Tower cannot move
-			if (movingRight) {
-				for (int i = currentSpotCol + 1; i < finalSpotCol; i++) {
-					if (board.getSpot(currentSpotRow, i).getPiece() != null) return false;
-				}
-			} else {
-				for (int i = currentSpotCol - 1; i > finalSpotCol; i--) {
-					if (board.getSpot(currentSpotRow, i).getPiece() != null) return false;
-				}
+			for (int i = currentColCheck; i <= finalColCheck; i++) {
+				if (board.getSpot(currentSpotRow, i).getPiece() != null) return false;
 			}
 
 			return true;
