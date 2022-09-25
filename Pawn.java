@@ -62,7 +62,7 @@ class Pawn extends Piece {
 
 			// We Check if the Pawn in the Second Row and the Vertical Change is 2 and the Horizontal Change is 0
 			// and that there is no pieces in front of the Pawn
-			if (verticalChange == 2 && horizontalChange == 0 && finalPiece == null && currentSpotRow == 1 && board.getSpot(2, 3).getPiece() == null) return true;
+			if (verticalChange == 2 && horizontalChange == 0 && finalPiece == null && currentSpotRow == 1 && board.getSpot(2, currentSpotCol).getPiece() == null) return true;
 
 		} else {
 			// We check if the Vertical Change is -1 & Horizontal Change is 0 and there is not pieces in front of the Pawn
@@ -77,7 +77,7 @@ class Pawn extends Piece {
 
 			// We Check if the Pawn in the Row befeore the End and the Vertical Change is -2 and the Horizontal Change is 0
 			// and that there is no pieces in front of the Pawn
-			if (verticalChange == -2 && horizontalChange == 0 && finalPiece == null && currentSpotRow == boardSize - 2 && board.getSpot(2, 0).getPiece() == null) return true;
+			if (verticalChange == -2 && horizontalChange == 0 && finalPiece == null && currentSpotRow == boardSize - 2 && board.getSpot(boardSize - 3, currentSpotCol).getPiece() == null) return true;
 		}
 
 
