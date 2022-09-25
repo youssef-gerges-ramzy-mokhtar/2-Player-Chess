@@ -6,11 +6,8 @@ class King extends Piece {
 	public King(Boolean white) {
 		super(white);
 
-		if (white == true) {
-			symbol = new ImageIcon(getClass().getResource("Images 1/WK.gif"));
-		} else {
-			symbol = new ImageIcon(getClass().getResource("Images 1/BK.gif"));
-		}
+		if (white == true) symbol = new ImageIcon(getClass().getResource("Images 1/WK.gif"));
+		else symbol = new ImageIcon(getClass().getResource("Images 1/BK.gif"));
 	}
 
 	// the canMove() method checks if a Piece can move from the currentSpot to the finalSpot

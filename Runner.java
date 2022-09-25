@@ -6,11 +6,8 @@ class Runner extends Piece {
 	public Runner(Boolean white) {
 		super(white);
 		
-		if (white == true) {
-			symbol = new ImageIcon(getClass().getResource("Images 1/WR.gif"), "wr");
-		} else {
-			symbol = new ImageIcon(getClass().getResource("Images 1/BR.gif"), "br");
-		}
+		if (white == true) symbol = new ImageIcon(getClass().getResource("Images 1/WR.gif"), "wr");
+		else symbol = new ImageIcon(getClass().getResource("Images 1/BR.gif"), "br");
 	}
 
 	// the canMove() method checks if a Piece can move from the currentSpot to the finalSpot

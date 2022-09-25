@@ -6,11 +6,8 @@ class Jumper extends Piece {
 	public Jumper(Boolean white) {
 		super(white);
 		
-		if (white == true) {
-			symbol = new ImageIcon(getClass().getResource("Images 1/WJ.gif"), "wj");
-		} else {
-			symbol = new ImageIcon(getClass().getResource("Images 1/BJ.gif"), "bj");
-		}
+		if (white == true) symbol = new ImageIcon(getClass().getResource("Images 1/WJ.gif"), "wj");
+		else symbol = new ImageIcon(getClass().getResource("Images 1/BJ.gif"), "bj");
 	}
 
 	// the canMove() method checks if a Piece can move from the currentSpot to the finalSpot
