@@ -39,78 +39,38 @@ class Runner extends Piece {
 
 			// We check if the movement of the Runner has a positive gradient
 			if (gradient > 0) {
-				// We check if the Runner is moving up or down
-				// If the Final Spot Row is larger than the Current Spot Row then the Runner is moving Up
-				Boolean movingUp = finalSpotRow > currentSpotRow;
+				int rowIndex = Math.min(currentSpotRow, finalSpotRow) + 1;
+				int colIndex = Math.min(currentSpotCol, finalSpotCol) + 1;
 
 				// Here if the Runner is moving up or if the Runner is moving down we check
 				// all the Diagonal Spots between the Current Spot and the Final Spot If any of those spots
 				// contain a Chess Piece then the Runner cannot move
-				if (movingUp) {
-					int rowIndex = currentSpotRow + 1;
-					int colIndex = currentSpotCol + 1;
+				while (rowIndex < Math.max(currentSpotRow, finalSpotRow)) {
+					if (board.getSpot(rowIndex, colIndex).getPiece() != null) return false;
 
-					while (rowIndex < finalSpotRow) {
-						if (board.getSpot(rowIndex, colIndex).getPiece() != null) return false;
-
-						// Both rowIndes & colIndex both are incremented by one, because it is a diagonal move
-						// and because the Runner is moving up, and the movement has a positive gradient
-						rowIndex++;
-						colIndex++;
-					}
-
-				} else {
-
-					int rowIndex = currentSpotRow - 1;
-					int colIndex = currentSpotCol - 1;
-
-					while (rowIndex > finalSpotRow) {
-						if (board.getSpot(rowIndex, colIndex).getPiece() != null) return false;
-
-						// Both rowIndes & colIndex both are decremented by one, because it is a diagonal move
-						// and because the Runner is moving down, and the movement has a positive gradient
-						rowIndex--;
-						colIndex--;
-					}
-
+					// Both rowIndes & colIndex both are incremented by one, because it is a diagonal move
+					// and because the Runner is moving up, and the movement has a positive gradient
+					rowIndex++;
+					colIndex++;
 				}
 
 				return true;
 
 			} else {
-				// We check if the Runner is moving up or down
-				// If the Final Spot Row is larger than the Current Spot Row then the Runner is moving Up
-				Boolean movingUp = finalSpotRow > currentSpotRow;
-
 				// Here if the Runner is moving up or if the Runner is moving down we check
 				// all the Diagonal Spots between the Current Spot and the Final Spot If any of those spots
 				// contain a Chess Piece then the Runner cannot move
-				if (movingUp) {
-					int rowIndex = currentSpotRow + 1;
-					int colIndex = currentSpotCol - 1;
+				int rowIndex = Math.min(currentSpotRow, finalSpotRow) + 1;
+				int colIndex = Math.max(currentSpotCol, finalSpotCol) - 1;
 
-					while (rowIndex < finalSpotRow) {
-						if (board.getSpot(rowIndex, colIndex).getPiece() != null) return false;
+				while (rowIndex < Math.max(currentSpotRow, finalSpotRow)) {
+					if (board.getSpot(rowIndex, colIndex).getPiece() != null) return false;
 
-						// We increment rowIndex by one & decrement colIndex by 1, because it is a diagonal move
-						// and because the Runner is moving up so the rowIndex is increasing
-						// and the movement has a negative gradient, so the colIndex is decreasing
-						rowIndex++;
-						colIndex--;
-					}
-				} else {
-					int rowIndex = currentSpotRow - 1;
-					int colIndex = currentSpotCol + 1;
-
-					while (rowIndex > finalSpotRow) {
-						if (board.getSpot(rowIndex, colIndex).getPiece() != null) return false;
-
-						// We decrement rowIndex by one & increment colIndex by 1, because it is a diagonal move
-						// and because the Runner is moving down so the rowIndex is decreasing
-						// and the movement has a negative gradient, so the colIndex is increasing
-						rowIndex--;
-						colIndex++;
-					}
+					// We increment rowIndex by one & decrement colIndex by 1, because it is a diagonal move
+					// and because the Runner is moving up so the rowIndex is increasing
+					// and the movement has a negative gradient, so the colIndex is decreasing
+					rowIndex++;
+					colIndex--;
 				}
 
 				return true;
