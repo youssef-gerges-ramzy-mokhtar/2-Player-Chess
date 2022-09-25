@@ -7,9 +7,9 @@ class Pawn extends Piece {
 		super(white);
 
 		if (white == true) {
-			symbol = new ImageIcon("Images 1/WP.gif");
+			symbol = new ImageIcon(getClass().getResource("Images 1/WP.gif"));
 		} else {
-			symbol = new ImageIcon("Images 1/BP.gif");
+			symbol = new ImageIcon(getClass().getResource("Images 1/BP.gif"));
 		}
 	}
 

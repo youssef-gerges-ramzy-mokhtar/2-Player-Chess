@@ -7,9 +7,9 @@ class King extends Piece {
 		super(white);
 
 		if (white == true) {
-			symbol = new ImageIcon("Images 1/WK.gif");
+			symbol = new ImageIcon(getClass().getResource("Images 1/WK.gif"));
 		} else {
-			symbol = new ImageIcon("Images 1/BK.gif");
+			symbol = new ImageIcon(getClass().getResource("Images 1/BK.gif"));
 		}
 	}
 
