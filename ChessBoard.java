@@ -18,8 +18,8 @@ class ChessBoard extends JPanel implements Board {
 	// Constructor //
 	public ChessBoard() {
 		// Initializing the Data Members
-		numRows = 5;
-		numColumns = 4;
+		numRows = 8;
+		numColumns = 8;
 		board = new SpotPanel[numRows][numColumns];
 		init();
 
@@ -39,40 +39,53 @@ class ChessBoard extends JPanel implements Board {
 
 	// init() is used to initialize the Chess Board with the Correct Chess Pieces in that Corect Positions
 	private void init() {
-		// Setting White Chess Pieces
 		board[0][0] = new SpotPanel(new Tower(true), 0, 0, color2);
-		board[0][1] = new SpotPanel(new Runner(true), 0, 1, color1);
-		board[0][2] = new SpotPanel(new Jumper(true), 0, 2, color2);
-		board[0][3] = new SpotPanel(new King(true), 0, 3, color1);
-		board[1][3] = new SpotPanel(new Pawn(true), 1, 3, color2);
+		board[0][1] = new SpotPanel(new Jumper(true), 0, 1, color1);
+		board[0][2] = new SpotPanel(new Runner(true), 0, 2, color2);
+		board[0][3] = new SpotPanel(new Queen(true), 0, 3, color1);
+		board[0][4] = new SpotPanel(new King(true), 0, 4, color2);
+		board[0][5] = new SpotPanel(new Runner(true), 0, 5, color1);
+		board[0][6] = new SpotPanel(new Jumper(true), 0, 6, color2);
+		board[0][7] = new SpotPanel(new Tower(true), 0, 7, color1);
 
-		// Setting Black Chess Pieces
-		board[4][0] = new SpotPanel(new King(false), 4, 0, color2);
-		board[4][1] = new SpotPanel(new Jumper(false), 4, 1, color1);
-		board[4][2] = new SpotPanel(new Runner(false), 4, 2, color2);
-		board[4][3] = new SpotPanel(new Tower(false), 4, 3, color1);
-		board[3][0] = new SpotPanel(new Pawn(false), 3, 0, color1);
+		Color currentColor = color1;
+		for (int i = 0; i < numColumns; i++) {
+			board[1][i] = new SpotPanel(new Pawn(true), 1, i, currentColor);
 
-		// Setting Empty Spots
-		board[1][0] = new SpotPanel(null, 1, 0, color1);
-		board[1][1] = new SpotPanel(null, 1, 1, color2);
-		board[1][2] = new SpotPanel(null, 1, 2, color1);
+			if (currentColor == color1) currentColor = color2;
+			else currentColor = color1;
+		}
 
-		board[3][1] = new SpotPanel(null, 3, 1, color2);
-		board[3][2] = new SpotPanel(null, 3, 2, color1);
-		board[3][3] = new SpotPanel(null, 3, 3, color2);
-
-		Color currentColor = color2;
-		for (int col = 0; col < numColumns; col++) {
-			board[2][col] = new SpotPanel(null, 2, col, currentColor);
-		
-			if (currentColor == color1) {
-				currentColor = color2;
-			} else {
-				currentColor = color1;
+		currentColor = color2;
+		for (int i = 2; i < 6; i++) {
+			for (int j = 0; j < numColumns; j++) {
+				board[i][j] = new SpotPanel(null, i, j, currentColor);
+				
+				if (currentColor == color1) currentColor = color2;
+				else currentColor = color1;
 			}
 
+			if (currentColor == color1)	currentColor = color2;
+			else currentColor = color1;
 		}
+
+		currentColor = color2;
+		int blackPawnRow = numRows - 1 - 1;
+		for (int i = 0; i < numColumns; i++) {
+			board[blackPawnRow][i] = new SpotPanel(new Pawn(false), blackPawnRow, i, currentColor);
+
+			if (currentColor == color1) currentColor = color2;
+			else currentColor = color1;
+		}	
+
+		board[7][0] = new SpotPanel(new Tower(false), 7, 0, color1);
+		board[7][1] = new SpotPanel(new Jumper(false), 7, 1, color2);
+		board[7][2] = new SpotPanel(new Runner(false), 7, 2, color1);
+		board[7][3] = new SpotPanel(new Queen(false), 7, 3, color2);
+		board[7][4] = new SpotPanel(new King(false), 7, 4, color1);
+		board[7][5] = new SpotPanel(new Runner(false), 7, 5, color2);
+		board[7][6] = new SpotPanel(new Jumper(false), 7, 6, color1);
+		board[7][7] = new SpotPanel(new Tower(false), 7, 7, color2);
 	}
 
 	// resetColor() is used to reset the Color of each SpotPanel
