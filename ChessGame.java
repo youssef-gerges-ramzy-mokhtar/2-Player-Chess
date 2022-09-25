@@ -179,16 +179,19 @@ class ChessGame extends JFrame implements MouseListener, ActionListener {
 		JLabel runner = new JLabel((new Runner(isWhite).getSymbol()));
 		JLabel jumper = new JLabel((new Jumper(isWhite).getSymbol()));
 		JLabel tower = new JLabel((new Tower(isWhite).getSymbol()));
+		JLabel queen = new JLabel((new Queen(isWhite).getSymbol()));
 
 		// Add the 3 JLabels to the promotionPanel
 		promotionPanel.add(runner);
 		promotionPanel.add(jumper);
 		promotionPanel.add(tower);
+		promotionPanel.add(queen);
 		
 		// Add Mouse Listener to the 3 JLabels
 		runner.addMouseListener(this);
 		jumper.addMouseListener(this);
 		tower.addMouseListener(this);
+		queen.addMouseListener(this);
 
 		return promotionPanel;
 	}
@@ -212,6 +215,10 @@ class ChessGame extends JFrame implements MouseListener, ActionListener {
 				finalSpot.getSpot().setPiece(new Tower(true));
 				break;
 
+			case "wq":
+				finalSpot.getSpot().setPiece(new Queen(true));
+				break;
+
 			case "br":
 				finalSpot.getSpot().setPiece(new Runner(false));
 				break;
@@ -223,6 +230,9 @@ class ChessGame extends JFrame implements MouseListener, ActionListener {
 			case "bt":
 				finalSpot.getSpot().setPiece(new Tower(false));
 				break;
+
+			case "bq":
+				finalSpot.getSpot().setPiece(new Queen(false));
 		}
 
 		finalSpot.setContent(finalSpot.getSpot().getPiece().getSymbol());
